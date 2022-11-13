@@ -1,6 +1,6 @@
 CREATE SCHEMA openalex;
 
-/*differences from original noted in these comments: remove 'without time zone' (mariadb uses utc without time zone in timestamps)*/
+/*differences from original noted in these comments: remove 'without time zone' (mariadb uses utc without time zone in timestamps) and set 'mag' and some boolean fields like 'is_oa' types to tinytext to avoid error attempting to load blank value as integer*/
 
 CREATE TABLE openalex.authors (
     id text NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE openalex.authors_ids (
     scopus text,
     twitter text,
     wikipedia text,
-    mag bigint
+    mag tinytext
 );
 
 /* removed 'without time zone' */
@@ -66,7 +66,7 @@ CREATE TABLE openalex.concepts_ids (
     wikipedia text,
     umls_aui json,
     umls_cui json,
-    mag bigint
+    mag tinytext
 );
 
 CREATE TABLE openalex.concepts_related_concepts (
@@ -125,7 +125,7 @@ CREATE TABLE openalex.institutions_ids (
     grid text,
     wikipedia text,
     wikidata text,
-    mag bigint
+    mag tinytext
 );
 
 /* removed 'without time zone' */
@@ -138,8 +138,8 @@ CREATE TABLE openalex.venues (
     publisher text,
     works_count integer,
     cited_by_count integer,
-    is_oa boolean,
-    is_in_doaj boolean,
+    is_oa tinytext,
+    is_in_doaj tinytext,
     homepage_url text,
     works_api_url text,
     updated_date timestamp without time zone
@@ -157,7 +157,7 @@ CREATE TABLE openalex.venues_ids (
     openalex text,
     issn_l text,
     issn json,
-    mag bigint
+    mag tinytext
 );
 
 CREATE TABLE openalex.works (
@@ -179,7 +179,7 @@ CREATE TABLE openalex.works_alternate_host_venues (
     work_id text,
     venue_id text,
     url text,
-    is_oa boolean,
+    is_oa tinytext,
     version text,
     license text
 );
@@ -210,7 +210,7 @@ CREATE TABLE openalex.works_host_venues (
     work_id text,
     venue_id text,
     url text,
-    is_oa boolean,
+    is_oa tinytext,
     version text,
     license text
 );
@@ -219,7 +219,7 @@ CREATE TABLE openalex.works_ids (
     work_id text NOT NULL,
     openalex text,
     doi text,
-    mag bigint,
+    mag tinytext,
     pmid text,
     pmcid text
 );
@@ -235,7 +235,7 @@ CREATE TABLE openalex.works_mesh (
 
 CREATE TABLE openalex.works_open_access (
     work_id text NOT NULL,
-    is_oa boolean,
+    is_oa tinytext,
     oa_status text,
     oa_url text
 );
