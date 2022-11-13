@@ -1,4 +1,4 @@
-# openalex-schema-mariadb
+# openalex-mariadb-toolkit
 
 NOTE: before you can load the .csv files into your database you must download, flatten, and decompress them!
 -How to download: https://docs.openalex.org/download-snapshot/download-to-your-machine
