@@ -1,4 +1,5 @@
 CREATE SCHEMA openalex;
+ALTER DATABASE openalex CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 /*differences from original noted in these comments: remove 'without time zone' (mariadb uses utc without time zone in timestamps) and set 'mag' and some boolean fields like 'is_oa' types to tinytext to avoid error attempting to load blank value as integer*/
 
