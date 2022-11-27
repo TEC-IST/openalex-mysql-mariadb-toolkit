@@ -1,4 +1,4 @@
-# openalex-mariadb-toolkit
+# openalex-mysql-mariadb-toolkit
 
 NOTE: this approach 'dehydrates' the substring "https://openalex.org/" out of id values to save space/data transfer/computation, assuming you will 'rehydrate' it at the point of end use when you want to refer to the object on openalex.org
 
