@@ -10,7 +10,7 @@ Prerequisites:
 Use the Python script to flatten the data into tab-delimited (.tsv) files (since commas can appear in text fields, tabs proved more reliable).  Each content type runs in its own thread.  Concepts, venues, and institutions should return quickly.  Authors will likely take a few hours and works may take several hours, depending on your machine.
 
 The SQL commands will:
-- create the OpenALex (openalex.org) schema, with some adjustments for MySQL / MariaDB
+- create the OpenAlex (openalex.org) schema, with some adjustments for MySQL / MariaDB
 - load 'flattened' tsv files into the database
 
 Credit:
