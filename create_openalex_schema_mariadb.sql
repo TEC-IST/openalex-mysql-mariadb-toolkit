@@ -1,11 +1,12 @@
 CREATE SCHEMA openalex;
 ALTER DATABASE openalex CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
-/*differences from original noted in these comments: remove 'without time zone' (mariadb uses utc without time zone in timestamps) and set 'mag' and some boolean fields like 'is_oa' types to tinytext to avoid error attempting to load blank value as integer*/
+/*differences from original noted in these comments: remove 'without time zone' (mariadb uses utc without time zone in timestamps) and set 'mag' and some 
+ean fields like 'is_oa' types to tinytext to avoid error attempting to load blank value as integer*/
 
 CREATE TABLE openalex.authors (
-    id text NOT NULL,
-    orcid text,
+    id tinytext NOT NULL,
+    orcid tinytext,
     display_name text,
     display_name_alternatives json,
     works_count integer,
@@ -16,18 +17,18 @@ CREATE TABLE openalex.authors (
 );
 
 CREATE TABLE openalex.authors_counts_by_year (
-    author_id text NOT NULL,
+    author_id tinytext NOT NULL,
     year integer NOT NULL,
     works_count integer,
     cited_by_count integer
 );
 
 CREATE TABLE openalex.authors_ids (
-    author_id text NOT NULL,
-    openalex text,
-    orcid text,
-    scopus text,
-    twitter text,
+    author_id tinytext NOT NULL,
+    openalex tinytext,
+    orcid tinytext,
+    scopus tinytext,
+    twitter tinytext,
     wikipedia text,
     mag tinytext
 );
@@ -35,7 +36,7 @@ CREATE TABLE openalex.authors_ids (
 /* removed 'without time zone' */
 
 CREATE TABLE openalex.concepts (
-    id text NOT NULL,
+    id tinytext NOT NULL,
     wikidata text,
     display_name text,
     level integer,
@@ -49,20 +50,20 @@ CREATE TABLE openalex.concepts (
 );
 
 CREATE TABLE openalex.concepts_ancestors (
-    concept_id text,
-    ancestor_id text
+    concept_id tinytext,
+    ancestor_id tinytext
 );
 
 CREATE TABLE openalex.concepts_counts_by_year (
-    concept_id text NOT NULL,
+    concept_id tinytext NOT NULL,
     year integer NOT NULL,
     works_count integer,
     cited_by_count integer
 );
 
 CREATE TABLE openalex.concepts_ids (
-    concept_id text NOT NULL,
-    openalex text,
+    concept_id tinytext NOT NULL,
+    openalex tinytext,
     wikidata text,
     wikipedia text,
     umls_aui json,
@@ -71,15 +72,15 @@ CREATE TABLE openalex.concepts_ids (
 );
 
 CREATE TABLE openalex.concepts_related_concepts (
-    concept_id text,
-    related_concept_id text,
+    concept_id tinytext,
+    related_concept_id tinytext,
     score real
 );
 
 /* removed 'without time zone' */
 
 CREATE TABLE openalex.institutions (
-    id text NOT NULL,
+    id tinytext NOT NULL,
     ror text,
     display_name text,
     country_code text,
@@ -96,20 +97,20 @@ CREATE TABLE openalex.institutions (
 );
 
 CREATE TABLE openalex.institutions_associated_institutions (
-    institution_id text,
-    associated_institution_id text,
+    institution_id tinytext,
+    associated_institution_id tinytext,
     relationship text
 );
 
 CREATE TABLE openalex.institutions_counts_by_year (
-    institution_id text NOT NULL,
+    institution_id tinytext NOT NULL,
     year integer NOT NULL,
     works_count integer,
     cited_by_count integer
 );
 
 CREATE TABLE openalex.institutions_geo (
-    institution_id text NOT NULL,
+    institution_id tinytext NOT NULL,
     city text,
     geonames_city_id text,
     region text,
@@ -120,8 +121,8 @@ CREATE TABLE openalex.institutions_geo (
 );
 
 CREATE TABLE openalex.institutions_ids (
-    institution_id text NOT NULL,
-    openalex text,
+    institution_id tinytext NOT NULL,
+    openalex tinytext,
     ror text,
     grid text,
     wikipedia text,
@@ -132,7 +133,7 @@ CREATE TABLE openalex.institutions_ids (
 /* removed 'without time zone' */
 
 CREATE TABLE openalex.venues (
-    id text NOT NULL,
+    id tinytext NOT NULL,
     issn_l text,
     issn json,
     display_name text,
@@ -143,26 +144,26 @@ CREATE TABLE openalex.venues (
     is_in_doaj tinytext,
     homepage_url text,
     works_api_url text,
-    updated_date timestamp without time zone
+    updated_date timestamp
 );
 
 CREATE TABLE openalex.venues_counts_by_year (
-    venue_id text NOT NULL,
+    venue_id tinytext NOT NULL,
     year integer NOT NULL,
     works_count integer,
     cited_by_count integer
 );
 
 CREATE TABLE openalex.venues_ids (
-    venue_id text,
-    openalex text,
+    venue_id tinytext,
+    openalex tinytext,
     issn_l text,
     issn json,
     mag tinytext
 );
 
 CREATE TABLE openalex.works (
-    id text NOT NULL,
+    id tinytext NOT NULL,
     doi text,
     title text,
     display_name text,
@@ -177,8 +178,8 @@ CREATE TABLE openalex.works (
 );
 
 CREATE TABLE openalex.works_alternate_host_venues (
-    work_id text,
-    venue_id text,
+    work_id tinytext,
+    venue_id tinytext,
     url text,
     is_oa tinytext,
     version text,
@@ -186,15 +187,15 @@ CREATE TABLE openalex.works_alternate_host_venues (
 );
 
 CREATE TABLE openalex.works_authorships (
-    work_id text,
+    work_id tinytext,
     author_position text,
-    author_id text,
-    institution_id text,
+    author_id tinytext,
+    institution_id tinytext,
     raw_affiliation_string text
 );
 
 CREATE TABLE openalex.works_biblio (
-    work_id text NOT NULL,
+    work_id tinytext NOT NULL,
     volume text,
     issue text,
     first_page text,
@@ -202,14 +203,14 @@ CREATE TABLE openalex.works_biblio (
 );
 
 CREATE TABLE openalex.works_concepts (
-    work_id text,
-    concept_id text,
+    work_id tinytext,
+    concept_id tinytext,
     score real
 );
 
 CREATE TABLE openalex.works_host_venues (
-    work_id text,
-    venue_id text,
+    work_id tinytext,
+    venue_id tinytext,
     url text,
     is_oa tinytext,
     version text,
@@ -217,8 +218,8 @@ CREATE TABLE openalex.works_host_venues (
 );
 
 CREATE TABLE openalex.works_ids (
-    work_id text NOT NULL,
-    openalex text,
+    work_id tinytext NOT NULL,
+    openalex tinytext,
     doi text,
     mag tinytext,
     pmid text,
@@ -226,29 +227,29 @@ CREATE TABLE openalex.works_ids (
 );
 
 CREATE TABLE openalex.works_mesh (
-    work_id text,
+    work_id tinytext,
     descriptor_ui text,
     descriptor_name text,
     qualifier_ui text,
     qualifier_name text,
-    is_major_topic boolean
+    is_major_topic tinytext
 );
 
 CREATE TABLE openalex.works_open_access (
-    work_id text NOT NULL,
+    work_id tinytext NOT NULL,
     is_oa tinytext,
     oa_status text,
     oa_url text
 );
 
 CREATE TABLE openalex.works_referenced_works (
-    work_id text,
-    referenced_work_id text
+    work_id tinytext,
+    referenced_work_id tinytext
 );
 
 CREATE TABLE openalex.works_related_works (
-    work_id text,
-    related_work_id text
+    work_id tinytext,
+    related_work_id tinytext
 );
 
 /* add length 255 (arbitrary) to author_id to prevent SQL error 1170 key specification without key length, adjusted syntax */
